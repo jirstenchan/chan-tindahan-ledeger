@@ -5,7 +5,9 @@ export function problemFor(e: unknown) {
     return "No connection. Check your Wi-fi and try again";
   if (e instanceof Error && e.message === "404")
     return "That list is not there anymore";
-  return "Something went wrong";
+  if (e instanceof Error && e.message === "401") return "Sign in again.";
+  if (e instanceof Error && e.message === "403")
+    return "Only the admin can do that.";
+  return "Something went wrong.";
 }
-
 export type Status = "loading" | "empty" | "error" | "content";

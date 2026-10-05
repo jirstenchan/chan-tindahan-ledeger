@@ -1,0 +1,20 @@
+import { StorePhoto } from "@/components/store-photo";
+import { ThemedText } from "@/components/themed-text";
+import { Spacing } from "@/constants/theme";
+import { useProfile } from "@/hooks/use-profile";
+import { supabase } from "@/lib/supabase";
+import { Button, SafeAreaView } from "react-native";
+
+export default function AccountScreen() {
+  const profile = useProfile();
+  return (
+    <SafeAreaView
+      style={{ flex: 1, padding: Spacing.four, gap: Spacing.three }}
+    >
+      <ThemedText type="subtitle">{profile?.email}</ThemedText>
+      <ThemedText themeColor="textSecondary">Role: {profile?.role}</ThemedText>
+      <Button title="Sign out" onPress={() => supabase.auth.signOut()} />
+      {profile?.role === "admin" && <StorePhoto />}
+    </SafeAreaView>
+  );
+}

@@ -1,3 +1,10 @@
+import AddCustomerModal from "@/components/add-customer-modal";
+import { CustomerRow } from "@/components/customer-row";
+import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
+import { Spacing } from "@/constants/theme";
+import { useCustomers } from "@/hooks/use-customers";
+import { useProfile } from "@/hooks/use-profile";
 import { router } from "expo-router";
 import { useState } from "react";
 import {
@@ -10,15 +17,9 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import AddCustomerModal from "@/components/add-customer-modal";
-import { CustomerRow } from "@/components/customer-row";
-import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
-import { Spacing } from "@/constants/theme";
-import { useCustomers } from "@/hooks/use-customers";
-
 export default function CustomersScreen() {
   const { status, customers, problem, retry } = useCustomers();
+  const profile = useProfile();
   const [query, setQuery] = useState("");
   const [adding, setAdding] = useState(false);
 
@@ -57,7 +58,9 @@ export default function CustomersScreen() {
         style={{ borderWidth: 1, borderRadius: 8, padding: 12 }}
       />
       <Text style={{ fontSize: 18 }}>Total owed: ₱{total.toFixed(2)}</Text>
-      <Button title="Add customer" onPress={() => setAdding(true)} />
+      {profile?.role === "admin" && (
+        <Button title="Add customer" onPress={() => setAdding(true)} />
+      )}
       <FlatList
         data={shown}
         keyExtractor={(c) => c.id}
