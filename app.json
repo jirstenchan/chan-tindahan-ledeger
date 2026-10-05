@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Chan_Marie_Week2",
-    "slug": "Chan_Marie_Week2",
+    "name": "Tindahan Ledger Chan",
+    "slug": "tindahan-ledger-chan",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "chanmarieapp",
+    "scheme": "tindahanledgerchan",
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon"
